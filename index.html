@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ForecastPro - Smart Sales Forecasting</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Advanced sales forecasting platform with AI-powered insights, data analysis, and business intelligence tools.">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2>ForecastPro</h2>
+    <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="index.html">🏠 Home</a>
+    <a href="about.html">ℹ️ About</a>
+    <a href="services.html">🛠️ Services</a>
+    <a href="forecast.html">📈 Forecast</a>
+    <a href="dashboard.html">📊 Dashboard</a>
+    <a href="ai.html">🤖 AI Assistant</a>
+    <a href="settings.html">⚙️ Settings</a>
+    <a href="login.html">🔐 Login</a>
+    <a href="contact.html">📞 Contact</a>
+  </nav>
+</div>
+<div class="main-content">
+<header>
+  <button onclick="toggleTheme()">🌙</button>
+</header>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>Smart Sales Forecasting Platform</h1>
+    <p>Transform your business decisions with AI-powered forecasting, advanced analytics, and intelligent insights. Predict trends, analyze data, and drive growth with confidence.</p>
+    <div class="hero-buttons">
+      <button onclick="window.location.href='forecast.html'" class="primary-btn">Start Forecasting</button>
+      <button onclick="window.location.href='about.html'" class="secondary-btn">Learn More</button>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-chart-placeholder">
+      <canvas id="heroChart"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section fade">
+  <h2>Powerful Features</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">📈</div>
+      <h3>Advanced Forecasting</h3>
+      <p>Multiple forecasting methods including exponential smoothing, linear regression, and seasonal analysis for accurate predictions.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🤖</div>
+      <h3>AI Assistant</h3>
+      <p>Get intelligent insights, data analysis, and recommendations powered by advanced AI algorithms.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <h3>Data Analytics</h3>
+      <p>Comprehensive data analysis tools including outlier detection, trend analysis, and pattern recognition.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📱</div>
+      <h3>Interactive Dashboards</h3>
+      <p>Beautiful, responsive dashboards with real-time charts, customizable views, and export capabilities.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔒</div>
+      <h3>Secure & Private</h3>
+      <p>Enterprise-grade security with user authentication, data encryption, and privacy protection.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">⚡</div>
+      <h3>Fast & Reliable</h3>
+      <p>Optimized performance with cloud infrastructure, ensuring fast response times and high availability.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section">
+  <div class="stats-container">
+    <div class="stat-item">
+      <div class="stat-number">99.9%</div>
+      <div class="stat-label">Uptime</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">10K+</div>
+      <div class="stat-label">Forecasts Generated</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">500+</div>
+      <div class="stat-label">Happy Businesses</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">4.9/5</div>
+      <div class="stat-label">User Rating</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+  <h2>Ready to Transform Your Business?</h2>
+  <p>Join thousands of businesses using ForecastPro to make data-driven decisions and drive growth.</p>
+  <button onclick="window.location.href='login.html'" class="cta-btn">Get Started Free</button>
+</section>
+
+<footer>
+  <p>© 2026 ForecastPro. All rights reserved.</p>
+</footer>
+</div>
+<script src="script.js"></script>
+<script>
+// Hero chart animation
+document.addEventListener('DOMContentLoaded', function() {
+  const ctx = document.getElementById('heroChart').getContext('2d');
+  const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+  gradient.addColorStop(0, 'rgba(139, 92, 246, 0.8)');
+  gradient.addColorStop(1, 'rgba(139, 92, 246, 0.1)');
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+      datasets: [{
+        data: [65, 78, 82, 75, 88, 95],
+        borderColor: '#8b5cf6',
+        backgroundColor: gradient,
+        fill: true,
+        tension: 0.4,
+        pointRadius: 0,
+        borderWidth: 3
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false }
+      },
+      scales: {
+        x: { display: false },
+        y: { display: false }
+      },
+      elements: {
+        point: { hoverRadius: 0 }
+      }
+    }
+  });
+});
+</script>
+</body>
+</html>
