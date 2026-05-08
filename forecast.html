@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Forecast Tool</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2>ForecastPro</h2>
+    <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="index.html">🏠 Home</a>
+    <a href="about.html">ℹ️ About</a>
+    <a href="services.html">🛠️ Services</a>
+    <a href="forecast.html">📈 Forecast</a>
+    <a href="dashboard.html">📊 Dashboard</a>
+    <a href="ai.html">🤖 AI Assistant</a>
+    <a href="login.html">🔐 Login</a>
+    <a href="contact.html">📞 Contact</a>
+  </nav>
+</div>
+<div class="main-content">
+<header>
+  <button onclick="toggleTheme()">🌙</button>
+</header>
+<section id="forecast" class="fade">
+  <h2>Advanced Sales Forecast Tool</h2>
+  <p id="userGreeting" class="user-greeting"></p>
+  <p>Enter sales data and choose forecasting method for accurate predictions.</p>
+  
+  <!-- Forecasting Method Selection -->
+  <div class="method-selector">
+    <h3>Choose Forecasting Method:</h3>
+    <div class="method-buttons">
+      <button id="btn-exponential" class="method-btn active" onclick="setMethod('exponential')">Exponential Smoothing</button>
+      <button id="btn-moving" class="method-btn" onclick="setMethod('moving')">Moving Average</button>
+      <button id="btn-regression" class="method-btn" onclick="setMethod('regression')">Linear Regression</button>
+      <button id="btn-seasonal" class="method-btn" onclick="setMethod('seasonal')">Seasonal Analysis</button>
+    </div>
+  </div>
+
+  <!-- Data Input Section -->
+  <div class="data-input-section">
+    <div class="period-selector">
+      <label for="startMonth">Starting Month:</label>
+      <select id="startMonth">
+        <option value="0">January</option>
+        <option value="1">February</option>
+        <option value="2">March</option>
+        <option value="3">April</option>
+        <option value="4">May</option>
+        <option value="5">June</option>
+        <option value="6">July</option>
+        <option value="7">August</option>
+        <option value="8">September</option>
+        <option value="9">October</option>
+        <option value="10">November</option>
+        <option value="11">December</option>
+      </select>
+      <label for="startYear">Starting Year:</label>
+      <input id="startYear" type="number" min="2000" max="2030" value="2024">
+    </div>
+    
+    <div class="data-input-grid">
+      <div class="input-group">
+        <label>Historical Sales Data (at least 3 months):</label>
+        <div id="sales-inputs" class="sales-inputs">
+          <input type="number" min="0" step="1" placeholder="Month 1" class="sales-input">
+          <input type="number" min="0" step="1" placeholder="Month 2" class="sales-input">
+          <input type="number" min="0" step="1" placeholder="Month 3" class="sales-input">
+        </div>
+        <button onclick="addMonth()" class="add-month-btn">+ Add Month</button>
+        <button onclick="removeMonth()" class="remove-month-btn">- Remove Month</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Forecast Controls -->
+  <div class="forecast-controls">
+    <div class="control-group">
+      <label for="forecastPeriods">Forecast Periods:</label>
+      <select id="forecastPeriods">
+        <option value="3">3 Months</option>
+        <option value="6">6 Months</option>
+        <option value="12">12 Months</option>
+      </select>
+    </div>
+    <div class="control-group">
+      <label for="confidenceLevel">Confidence Level:</label>
+      <select id="confidenceLevel">
+        <option value="80">80%</option>
+        <option value="90">90%</option>
+        <option value="95">95%</option>
+      </select>
+    </div>
+    <button onclick="forecastSales()" class="forecast-btn">Generate Forecast</button>
+  </div>
+  <!-- Results Section -->
+  <div class="results-section">
+    <div id="result" class="result-text"></div>
+    
+    <!-- Analysis Panel -->
+    <div id="analysis-panel" class="analysis-panel" style="display: none;">
+      <h3>Data Analysis</h3>
+      <div class="analysis-grid">
+        <div class="analysis-item">
+          <h4>Trend Analysis</h4>
+          <p id="trend-analysis"></p>
+        </div>
+        <div class="analysis-item">
+          <h4>Outlier Detection</h4>
+          <p id="outlier-analysis"></p>
+        </div>
+        <div class="analysis-item">
+          <h4>Seasonal Patterns</h4>
+          <p id="seasonal-analysis"></p>
+        </div>
+        <div class="analysis-item">
+          <h4>Accuracy Metrics</h4>
+          <p id="accuracy-metrics"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart Controls -->
+  <div class="chart-controls">
+    <h3>Visualization Options</h3>
+    <div class="chart-options">
+      <label><input type="checkbox" id="showConfidence" checked> Show Confidence Intervals</label>
+      <label><input type="checkbox" id="showTrend" checked> Show Trend Line</label>
+      <label><input type="checkbox" id="showOutliers"> Highlight Outliers</label>
+    </div>
+    <div class="chart-type-selector">
+      <button onclick="setChartType('line')" class="chart-type-btn active" id="btn-line">Line Chart</button>
+      <button onclick="setChartType('bar')" class="chart-type-btn" id="btn-bar">Bar Chart</button>
+      <button onclick="setChartType('area')" class="chart-type-btn" id="btn-area">Area Chart</button>
+    </div>
+  </div>
+
+  <!-- Enhanced Chart Area -->
+  <div class="chart-wrapper">
+    <canvas id="salesChart"></canvas>
+  </div>
+
+  <!-- Forecast Summary -->
+  <div id="forecast-summary" class="forecast-summary" style="display: none;">
+    <h3>Forecast Summary</h3>
+    <div class="summary-stats">
+      <div class="stat-item">
+        <span class="stat-label">Average Growth Rate:</span>
+        <span class="stat-value" id="avg-growth">0%</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">Forecast Accuracy:</span>
+        <span class="stat-value" id="forecast-accuracy">85%</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">Confidence Level:</span>
+        <span class="stat-value" id="confidence-level">90%</span>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <p>© 2026 ForecastPro</p>
+</footer>
+</div>
+<script src="script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  initApp();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Settings - ForecastPro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Manage your ForecastPro account settings, preferences, and configuration.">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2>ForecastPro</h2>
+    <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="index.html">🏠 Home</a>
+    <a href="about.html">ℹ️ About</a>
+    <a href="services.html">🛠️ Services</a>
+    <a href="forecast.html">📈 Forecast</a>
+    <a href="dashboard.html">📊 Dashboard</a>
+    <a href="ai.html">🤖 AI Assistant</a>
+    <a href="settings.html">⚙️ Settings</a>
+    <a href="login.html">🔐 Login</a>
+    <a href="contact.html">📞 Contact</a>
+  </nav>
+</div>
+<div class="main-content">
+<header>
+  <button onclick="toggleTheme()">🌙</button>
+</header>
+
+<section class="settings-section fade">
+  <h1>Account Settings</h1>
+  <p id="userGreeting" class="user-greeting"></p>
+
+  <div class="settings-container">
+    <div class="settings-sidebar">
+      <div class="settings-nav">
+        <button class="settings-tab active" onclick="showSettingsTab(event, 'profile')">Profile</button>
+        <button class="settings-tab" onclick="showSettingsTab(event, 'preferences')">Preferences</button>
+        <button class="settings-tab" onclick="showSettingsTab(event, 'security')">Security</button>
+        <button class="settings-tab" onclick="showSettingsTab(event, 'integrations')">Integrations</button>
+      </div>
+    </div>
+
+    <div class="settings-content">
+      <!-- Profile Settings -->
+      <div id="profile-tab" class="settings-panel active">
+        <h2>Profile Information</h2>
+        <div class="settings-form">
+          <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" placeholder="Enter your full name">
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="Enter your email">
+          </div>
+          <div class="form-group">
+            <label for="company">Company</label>
+            <input type="text" id="company" placeholder="Enter your company name">
+          </div>
+          <div class="form-group">
+            <label for="jobTitle">Job Title</label>
+            <input type="text" id="jobTitle" placeholder="Enter your job title">
+          </div>
+          <div class="form-group">
+            <label for="timezone">Timezone</label>
+            <select id="timezone">
+              <option value="UTC">UTC</option>
+              <option value="EST">Eastern Time</option>
+              <option value="PST">Pacific Time</option>
+              <option value="GMT">Greenwich Mean Time</option>
+            </select>
+          </div>
+          <button onclick="saveProfile()" class="save-btn">Save Changes</button>
+        </div>
+      </div>
+
+      <!-- Preferences Settings -->
+      <div id="preferences-tab" class="settings-panel">
+        <h2>Preferences</h2>
+        <div class="settings-form">
+          <div class="form-group">
+            <label>Theme</label>
+            <div class="radio-group">
+              <label><input type="radio" name="theme" value="light" checked> Light</label>
+              <label><input type="radio" name="theme" value="dark"> Dark</label>
+              <label><input type="radio" name="theme" value="auto"> Auto</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Default Chart Type</label>
+            <select id="defaultChartType">
+              <option value="line">Line Chart</option>
+              <option value="bar">Bar Chart</option>
+              <option value="area">Area Chart</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Forecast Periods</label>
+            <select id="defaultPeriods">
+              <option value="3">3 Months</option>
+              <option value="6">6 Months</option>
+              <option value="12">12 Months</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Notifications</label>
+            <div class="checkbox-group">
+              <label><input type="checkbox" checked> Email notifications</label>
+              <label><input type="checkbox" checked> Forecast alerts</label>
+              <label><input type="checkbox"> Weekly reports</label>
+            </div>
+          </div>
+          <button onclick="savePreferences()" class="save-btn">Save Preferences</button>
+        </div>
+      </div>
+
+      <!-- Security Settings -->
+      <div id="security-tab" class="settings-panel">
+        <h2>Security Settings</h2>
+        <div class="settings-form">
+          <div class="form-group">
+            <label for="currentPassword">Current Password</label>
+            <input type="password" id="currentPassword" placeholder="Enter current password">
+          </div>
+          <div class="form-group">
+            <label for="newPassword">New Password</label>
+            <input type="password" id="newPassword" placeholder="Enter new password">
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword">Confirm New Password</label>
+            <input type="password" id="confirmPassword" placeholder="Confirm new password">
+          </div>
+          <div class="security-options">
+            <h3>Two-Factor Authentication</h3>
+            <p>Add an extra layer of security to your account.</p>
+            <button class="enable-2fa-btn">Enable 2FA</button>
+          </div>
+          <div class="security-options">
+            <h3>Active Sessions</h3>
+            <p>Manage your active login sessions.</p>
+            <button class="view-sessions-btn">View Sessions</button>
+          </div>
+          <button onclick="changePassword()" class="save-btn">Change Password</button>
+        </div>
+      </div>
+
+      
+      <!-- Integrations Settings -->
+      <div id="integrations-tab" class="settings-panel">
+        <h2>Integrations</h2>
+        <div class="integrations-list">
+          <div class="integration-item">
+            <div class="integration-info">
+              <h3>Google Analytics</h3>
+              <p>Connect your Google Analytics account for enhanced data insights.</p>
+            </div>
+            <button class="connect-btn">Connect</button>
+          </div>
+          <div class="integration-item">
+            <div class="integration-info">
+              <h3>Salesforce</h3>
+              <p>Sync your sales data with Salesforce CRM.</p>
+            </div>
+            <button class="connect-btn">Connect</button>
+          </div>
+          <div class="integration-item">
+            <div class="integration-info">
+              <h3>Slack</h3>
+              <p>Receive notifications and alerts in Slack.</p>
+            </div>
+            <button class="connect-btn">Connect</button>
+          </div>
+          <div class="integration-item">
+            <div class="integration-info">
+              <h3>Zapier</h3>
+              <p>Automate workflows with thousands of apps.</p>
+            </div>
+            <button class="connect-btn">Connect</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 ForecastPro. All rights reserved.</p>
+</footer>
+</div>
+<script src="script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  initApp();
+});
+
+function showSettingsTab(event, tabName) {
+  // Hide all panels
+  document.querySelectorAll('.settings-panel').forEach(panel => {
+    panel.classList.remove('active');
+  });
+  document.querySelectorAll('.settings-tab').forEach(tab => {
+    tab.classList.remove('active');
+  });
+
+  // Show selected panel
+  document.getElementById(tabName + '-tab').classList.add('active');
+  event.target.classList.add('active');
+}
+
+function saveProfile() {
+  // Implementation for saving profile
+  alert('Profile saved successfully!');
+}
+
+function savePreferences() {
+  // Implementation for saving preferences
+  alert('Preferences saved successfully!');
+}
+
+function changePassword() {
+  // Implementation for changing password
+  alert('Password changed successfully!');
+}
+</script>
+</body>
+</html>

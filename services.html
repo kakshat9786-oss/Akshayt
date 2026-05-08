@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Services - ForecastPro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore ForecastPro's comprehensive business intelligence services including forecasting, analytics, and AI-powered insights.">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2>ForecastPro</h2>
+    <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="index.html">🏠 Home</a>
+    <a href="about.html">ℹ️ About</a>
+    <a href="services.html">🛠️ Services</a>
+    <a href="forecast.html">📈 Forecast</a>
+    <a href="dashboard.html">📊 Dashboard</a>
+    <a href="ai.html">🤖 AI Assistant</a>
+    <a href="login.html">🔐 Login</a>
+    <a href="contact.html">📞 Contact</a>
+  </nav>
+</div>
+<div class="main-content">
+<header>
+  <button onclick="toggleTheme()">🌙</button>
+</header>
+
+<section class="services-hero fade">
+  <h1>Our Services</h1>
+  <p>Comprehensive business intelligence solutions to drive your growth and success.</p>
+</section>
+
+<section class="services-content fade">
+  <div class="service-section">
+    <h2>Core Services</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">📈</div>
+        <h3>Sales Forecasting</h3>
+        <p>Advanced sales prediction using multiple statistical methods including exponential smoothing, linear regression, and seasonal analysis.</p>
+        <ul>
+          <li>Multiple forecasting algorithms</li>
+          <li>Interactive visualizations</li>
+          <li>Accuracy metrics and validation</li>
+          <li>Customizable time periods</li>
+        </ul>
+        <button onclick="window.location.href='forecast.html'" class="service-btn">Try Forecasting</button>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🤖</div>
+        <h3>AI Assistant</h3>
+        <p>Intelligent AI-powered assistant for data analysis, insights generation, and business recommendations.</p>
+        <ul>
+          <li>Natural language queries</li>
+          <li>File upload and analysis</li>
+          <li>Automated insights</li>
+          <li>Interactive chat interface</li>
+        </ul>
+        <button onclick="window.location.href='ai.html'" class="service-btn">Chat with AI</button>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">📊</div>
+        <h3>Analytics Dashboard</h3>
+        <p>Comprehensive business analytics dashboard with real-time charts, KPIs, and performance monitoring.</p>
+        <ul>
+          <li>Real-time data visualization</li>
+          <li>Customizable dashboards</li>
+          <li>KPI tracking and alerts</li>
+          <li>Export and reporting</li>
+        </ul>
+        <button onclick="window.location.href='dashboard.html'" class="service-btn">View Dashboard</button>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🔍</div>
+        <h3>Data Analysis</h3>
+        <p>Advanced data analysis tools including outlier detection, trend analysis, and pattern recognition.</p>
+        <ul>
+          <li>Outlier detection algorithms</li>
+          <li>Trend and seasonality analysis</li>
+          <li>Statistical validation</li>
+          <li>Data quality assessment</li>
+        </ul>
+        <button onclick="window.location.href='forecast.html'" class="service-btn">Analyze Data</button>
+      </div>
+    </div>
+  </div>
+
+ 
+  
+  <div class="service-section">
+    <h2>Ready to Get Started?</h2>
+    <p>Transform your business with powerful analytics and forecasting tools. Choose the plan that fits your needs and start making data-driven decisions today.</p>
+    <div class="cta-buttons">
+      <button onclick="window.location.href='login.html'" class="primary-btn">Start Free Trial</button>
+      <button onclick="window.location.href='contact.html'" class="secondary-btn">Schedule Demo</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 ForecastPro. All rights reserved.</p>
+</footer>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

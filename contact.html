@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Us - ForecastPro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Get in touch with ForecastPro team for support, sales inquiries, and business partnerships.">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2>ForecastPro</h2>
+    <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="index.html">🏠 Home</a>
+    <a href="about.html">ℹ️ About</a>
+    <a href="services.html">🛠️ Services</a>
+    <a href="forecast.html">📈 Forecast</a>
+    <a href="dashboard.html">📊 Dashboard</a>
+    <a href="ai.html">🤖 AI Assistant</a>
+    <a href="settings.html">⚙️ Settings</a>
+    <a href="login.html">🔐 Login</a>
+    <a href="contact.html">📞 Contact</a>
+  </nav>
+</div>
+<div class="main-content">
+<header>
+  <button onclick="toggleTheme()">🌙</button>
+</header>
+
+<section class="contact-page fade">
+  <div class="contact-header">
+    <h1>Contact Us</h1>
+    <p class="contact-intro">Have questions about ForecastPro? Need support or want to discuss a partnership? We're here to help!</p>
+  </div>
+
+  <div class="contact-content">
+    <!-- Contact Methods -->
+    <div class="contact-methods">
+      <div class="contact-card">
+        <div class="contact-icon">📧</div>
+        <h3>Email Support</h3>
+        <p>Get help from our technical support team</p>
+        <div class="contact-details">
+          <a href="mailto:support@forecastpro.com">support@forecastpro.com</a>
+          <p>Response time: < 2 hours</p>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-icon">💼</div>
+        <h3>Sales Inquiries</h3>
+        <p>Discuss pricing, features, and custom solutions</p>
+        <div class="contact-details">
+          <a href="mailto:sales@forecastpro.com">sales@forecastpro.com</a>
+          <p>Response time: < 4 hours</p>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-icon">🤝</div>
+        <h3>Partnerships</h3>
+        <p>Explore integration and business partnerships</p>
+        <div class="contact-details">
+          <a href="mailto:partnerships@forecastpro.com">partnerships@forecastpro.com</a>
+          <p>Response time: < 24 hours</p>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-icon">📞</div>
+        <h3>Phone Support</h3>
+        <p>Speak directly with our support team</p>
+        <div class="contact-details">
+          <a href="tel:+1-800-FORECAST">+1 (800) FORECAST</a>
+          <p>Mon-Fri: 9AM-6PM EST</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Form -->
+    <div class="contact-form-section">
+      <h2>Send us a Message</h2>
+      <p>Fill out the form below and we'll get back to you as soon as possible.</p>
+
+      <form class="contact-form" id="contactForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="contact-name">Full Name *</label>
+            <input type="text" id="contact-name" name="name" required placeholder="Enter your full name">
+          </div>
+          <div class="form-group">
+            <label for="contact-email">Email Address *</label>
+            <input type="email" id="contact-email" name="email" required placeholder="Enter your email address">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="contact-company">Company</label>
+            <input type="text" id="contact-company" name="company" placeholder="Enter your company name">
+          </div>
+          <div class="form-group">
+            <label for="contact-phone">Phone Number</label>
+            <input type="tel" id="contact-phone" name="phone" placeholder="Enter your phone number">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="contact-subject">Subject *</label>
+          <select id="contact-subject" name="subject" required>
+            <option value="">Select a subject</option>
+            <option value="support">Technical Support</option>
+            <option value="sales">Sales Inquiry</option>
+            <option value="partnership">Partnership</option>
+            <option value="billing">Billing Question</option>
+            <option value="feature">Feature Request</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="contact-message">Message *</label>
+          <textarea id="contact-message" name="message" required placeholder="Tell us how we can help you..." rows="6"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input type="checkbox" name="newsletter" checked>
+            Subscribe to our newsletter for product updates and tips
+          </label>
+        </div>
+
+        <button type="submit" class="submit-btn" onclick="handleContactSubmit(event)">Send Message</button>
+      </form>
+    </div>
+
+    
+    
+</section>
+
+<footer>
+  <p>© 2026 ForecastPro. All rights reserved.</p>
+</footer>
+</div>
+<script src="script.js"></script>
+<script>
+function handleContactSubmit(event) {
+  event.preventDefault();
+
+  const form = document.getElementById('contactForm');
+  const formData = new FormData(form);
+
+  // Basic validation
+  const name = formData.get('name');
+  const email = formData.get('email');
+  const message = formData.get('message');
+
+  if (!name || !email || !message) {
+    alert('Please fill in all required fields.');
+    return;
+  }
+
+  // Simulate form submission
+  alert('Thank you for your message! We\'ll get back to you within 24 hours.');
+
+  // Reset form
+  form.reset();
+}
+</script>
+</body>
+</html>

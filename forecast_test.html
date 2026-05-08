@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Forecast Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="main-content">
+    <section id="forecast" class="fade">
+      <h2>Enhanced Forecasting Tool Test</h2>
+
+      <!-- Method Selection -->
+      <div class="method-selector">
+        <h3>Choose Forecasting Method:</h3>
+        <div class="method-buttons">
+          <button id="btn-exponential" class="method-btn active" onclick="setMethod('exponential')">Exponential Smoothing</button>
+          <button id="btn-moving" class="method-btn" onclick="setMethod('moving')">Moving Average</button>
+          <button id="btn-regression" class="method-btn" onclick="setMethod('regression')">Linear Regression</button>
+          <button id="btn-seasonal" class="method-btn" onclick="setMethod('seasonal')">Seasonal Analysis</button>
+        </div>
+      </div>
+
+      <!-- Data Input -->
+      <div class="data-input-section">
+        <div class="data-input-grid">
+          <div class="input-group">
+            <label>Historical Sales Data:</label>
+            <div id="sales-inputs" class="sales-inputs">
+              <input type="number" min="0" step="1" placeholder="Month 1" class="sales-input" value="100">
+              <input type="number" min="0" step="1" placeholder="Month 2" class="sales-input" value="120">
+              <input type="number" min="0" step="1" placeholder="Month 3" class="sales-input" value="110">
+              <input type="number" min="0" step="1" placeholder="Month 4" class="sales-input" value="130">
+            </div>
+            <button onclick="addMonth()" class="add-month-btn">+ Add Month</button>
+            <button onclick="removeMonth()" class="remove-month-btn">- Remove Month</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="forecast-controls">
+        <div class="control-group">
+          <label for="forecastPeriods">Forecast Periods:</label>
+          <select id="forecastPeriods">
+            <option value="3">3 Months</option>
+            <option value="6">6 Months</option>
+          </select>
+        </div>
+        <button onclick="forecastSales()" class="forecast-btn">Generate Forecast</button>
+      </div>
+
+      <!-- Results -->
+      <div class="results-section">
+        <div id="result" class="result-text"></div>
+        <div id="analysis-panel" class="analysis-panel" style="display: none;">
+          <h3>Data Analysis</h3>
+          <div class="analysis-grid">
+            <div class="analysis-item">
+              <h4>Trend Analysis</h4>
+              <p id="trend-analysis"></p>
+            </div>
+            <div class="analysis-item">
+              <h4>Outlier Detection</h4>
+              <p id="outlier-analysis"></p>
+            </div>
+            <div class="analysis-item">
+              <h4>Seasonal Patterns</h4>
+              <p id="seasonal-analysis"></p>
+            </div>
+            <div class="analysis-item">
+              <h4>Accuracy Metrics</h4>
+              <p id="accuracy-metrics"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chart -->
+      <div class="chart-wrapper">
+        <canvas id="salesChart"></canvas>
+      </div>
+
+      <!-- Summary -->
+      <div id="forecast-summary" class="forecast-summary" style="display: none;">
+        <h3>Forecast Summary</h3>
+        <div class="summary-stats">
+          <div class="stat-item">
+            <span class="stat-label">Average Growth Rate:</span>
+            <span class="stat-value" id="avg-growth">0%</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Forecast Accuracy:</span>
+            <span class="stat-value" id="forecast-accuracy">85%</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Confidence Level:</span>
+            <span class="stat-value" id="confidence-level">90%</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

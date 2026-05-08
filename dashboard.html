@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard - ForecastPro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Comprehensive analytics dashboard with real-time charts, KPIs, and business intelligence insights.">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2>ForecastPro</h2>
+    <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="index.html">🏠 Home</a>
+    <a href="about.html">ℹ️ About</a>
+    <a href="services.html">🛠️ Services</a>
+    <a href="forecast.html">📈 Forecast</a>
+    <a href="dashboard.html">📊 Dashboard</a>
+    <a href="ai.html">🤖 AI Assistant</a>
+    <a href="settings.html">⚙️ Settings</a>
+    <a href="login.html">🔐 Login</a>
+    <a href="contact.html">📞 Contact</a>
+  </nav>
+</div>
+<div class="main-content">
+<header>
+  <button onclick="toggleTheme()">🌙</button>
+</header>
+
+<section class="dashboard-page fade">
+  <div class="dashboard-header">
+    <h1 class="dashboard-title">Analytics Dashboard</h1>
+    <p id="userGreeting" class="user-greeting"></p>
+    <div class="dashboard-controls">
+      <select id="timeRange">
+        <option value="7d">Last 7 days</option>
+        <option value="30d">Last 30 days</option>
+        <option value="90d">Last 90 days</option>
+        <option value="1y">Last year</option>
+      </select>
+      <button onclick="refreshDashboard()" class="refresh-btn">🔄 Refresh</button>
+      <button onclick="exportDashboard()" class="export-btn">📤 Export</button>
+    </div>
+  </div>
+
+  <p class="dashboard-intro">Monitor your sales performance, track forecasts, and manage your data insights in one comprehensive view.</p>
+
+  <!-- Dynamic Dashboard Content -->
+  <div id="dashboardContent"></div>
+
+
+  <!-- Quick Actions -->
+  <div class="quick-actions">
+    <h3>Quick Actions</h3>
+    <div class="action-buttons">
+      <button onclick="window.location.href='forecast.html'" class="action-btn">
+        <span class="action-icon">📈</span>
+        <span>Create Forecast</span>
+      </button>
+      <button onclick="window.location.href='ai.html'" class="action-btn">
+        <span class="action-icon">🤖</span>
+        <span>AI Assistant</span>
+      </button>
+      <button onclick="exportDashboard()" class="action-btn">
+        <span class="action-icon">📤</span>
+        <span>Export Report</span>
+      </button>
+      <button onclick="window.location.href='settings.html'" class="action-btn">
+        <span class="action-icon">⚙️</span>
+        <span>Settings</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 ForecastPro. All rights reserved.</p>
+</footer>
+</div>
+<script src="script.js"></script>
+<script>
+// Dashboard charts and functionality
+document.addEventListener('DOMContentLoaded', function() {
+  initApp();
+  initDashboardCharts();
+});
+
+function initDashboardCharts() {
+}
+
+function toggleChartType(chartName, type) {
+  const buttons = event.target.parentElement.querySelectorAll('.chart-type-btn');
+  buttons.forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+  
+  if (chartName === 'forecastActual' && window.forecastActualChart) {
+    window.forecastActualChart.config.type = type;
+    window.forecastActualChart.update();
+  }
+}
+
+function refreshDashboard() {
+  location.reload();
+}
+
+function exportDashboard() {
+  alert('Dashboard exported successfully!');
+}
+</script>
+

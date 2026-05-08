@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - ForecastPro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Secure login and account registration for ForecastPro forecasting platform.">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="login-page">
+  <div class="login-header">
+    <div class="logo-section">
+      <h1>ForecastPro</h1>
+      <p>Advanced Forecasting Platform</p>
+    </div>
+    <button onclick="toggleTheme()" class="theme-toggle">🌙</button>
+  </div>
+
+  <div class="auth-container">
+    <!-- Login Form -->
+    <div class="auth-form active" id="loginForm">
+      <div class="auth-header">
+        <h2>Welcome Back</h2>
+        <p>Sign in to your ForecastPro account</p>
+      </div>
+
+      <form class="login-form" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label for="login-email">Email Address</label>
+          <input type="email" id="login-email" name="email" required placeholder="Enter your email" autocomplete="email">
+        </div>
+
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <div class="password-input">
+            <input type="password" id="login-password" name="password" required placeholder="Enter your password" autocomplete="current-password">
+            <button type="button" onclick="togglePasswordVisibility('login-password')" class="password-toggle">👁️</button>
+          </div>
+        </div>
+
+        <div class="form-options">
+          <label class="checkbox-label">
+            <input type="checkbox" name="remember" id="rememberMe">
+            Remember me
+          </label>
+          <a href="#" onclick="showForgotPassword()" class="forgot-link">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="auth-btn primary">Sign In</button>
+
+        <p id="loginMessage" class="login-message">Use <strong>demo@forecastpro.com</strong> and <strong>demo2026</strong> or register a new account.</p>
+
+        <div class="auth-divider">
+          <span>or</span>
+        </div>
+
+        <div class="social-login">
+          <button type="button" onclick="loginWithGoogle()" class="social-btn google">
+            <span class="social-icon">G</span>
+            Continue with Google
+          </button>
+          <button type="button" onclick="loginWithMicrosoft()" class="social-btn microsoft">
+            <span class="social-icon">M</span>
+            Continue with Microsoft
+          </button>
+        </div>
+      </form>
+
+      <div class="auth-footer">
+        <p>Don't have an account? <a href="#" onclick="showRegisterForm()">Create one</a></p>
+      </div>
+    </div>
+
+    <!-- Register Form -->
+    <div class="auth-form" id="registerForm">
+      <div class="auth-header">
+        <h2>Create Account</h2>
+        <p>Join ForecastPro and start forecasting smarter</p>
+      </div>
+
+      <form class="register-form" onsubmit="handleRegister(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="register-firstname">First Name</label>
+            <input type="text" id="register-firstname" name="firstname" required placeholder="First name" autocomplete="given-name">
+          </div>
+          <div class="form-group">
+            <label for="register-lastname">Last Name</label>
+            <input type="text" id="register-lastname" name="lastname" required placeholder="Last name" autocomplete="family-name">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="register-email">Email Address</label>
+          <input type="email" id="register-email" name="email" required placeholder="Enter your email" autocomplete="email">
+        </div>
+
+        <div class="form-group">
+          <label for="register-company">Company (Optional)</label>
+          <input type="text" id="register-company" name="company" placeholder="Company name" autocomplete="organization">
+        </div>
+
+        <div class="form-group">
+          <label for="register-password">Password</label>
+          <div class="password-input">
+            <input type="password" id="register-password" name="password" required placeholder="Create a password" autocomplete="new-password">
+            <button type="button" onclick="togglePasswordVisibility('register-password')" class="password-toggle">👁️</button>
+          </div>
+          <div class="password-strength" id="passwordStrength"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="register-confirm-password">Confirm Password</label>
+          <div class="password-input">
+            <input type="password" id="register-confirm-password" name="confirmPassword" required placeholder="Confirm your password" autocomplete="new-password">
+            <button type="button" onclick="togglePasswordVisibility('register-confirm-password')" class="password-toggle">👁️</button>
+          </div>
+        </div>
+
+        <div class="form-options">
+          <label class="checkbox-label">
+            <input type="checkbox" name="terms" id="acceptTerms" required>
+            I agree to the <a href="#" onclick="showTerms()">Terms of Service</a> and <a href="#" onclick="showPrivacy()">Privacy Policy</a>
+          </label>
+        </div>
+
+        <div class="form-options">
+          <label class="checkbox-label">
+            <input type="checkbox" name="newsletter" id="newsletterSignup" checked>
+            Subscribe to our newsletter for product updates and tips
+          </label>
+        </div>
+
+        <button type="submit" class="auth-btn primary">Create Account</button>
+      </form>
+
+      <div class="auth-footer">
+        <p>Already have an account? <a href="#" onclick="showLoginForm()">Sign in</a></p>
+      </div>
+    </div>
+
+    <!-- Forgot Password Form -->
+    <div class="auth-form" id="forgotPasswordForm">
+      <div class="auth-header">
+        <h2>Reset Password</h2>
+        <p>Enter your email address and we'll send you a link to reset your password</p>
+      </div>
+
+      <form class="forgot-form" onsubmit="handleForgotPassword(event)">
+        <div class="form-group">
+          <label for="forgot-email">Email Address</label>
+          <input type="email" id="forgot-email" name="email" required placeholder="Enter your email" autocomplete="email">
+        </div>
+
+        <button type="submit" class="auth-btn primary">Send Reset Link</button>
+      </form>
+
+      <div class="auth-footer">
+        <p>Remember your password? <a href="#" onclick="showLoginForm()">Back to sign in</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Demo Credentials -->
+  <div class="demo-info">
+    <h3>Demo Account</h3>
+    <p>For testing purposes, use these credentials:</p>
+    <div class="demo-credentials">
+      <p><strong>Email:</strong> demo@forecastpro.com</p>
+      <p><strong>Password:</strong> demo2026</p>
+    </div>
+    <p class="demo-note">This account has sample data pre-loaded for exploration.</p>
+  </div>
+
+  <!-- Features Preview -->
+  <div class="features-preview">
+    <h3>Why Choose ForecastPro?</h3>
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="feature-icon">🤖</div>
+        <h4>AI-Powered</h4>
+        <p>Advanced machine learning algorithms for accurate forecasting</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">📊</div>
+        <h4>Real-time Analytics</h4>
+        <p>Live dashboards and instant insights from your data</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🔒</div>
+        <h4>Secure & Private</h4>
+        <p>Enterprise-grade security for your sensitive business data</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">⚡</div>
+        <h4>Fast & Reliable</h4>
+        <p>High-performance platform that scales with your business</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+// Authentication form switching
+function showRegisterForm() {
+  document.getElementById('loginForm').classList.remove('active');
+  document.getElementById('registerForm').classList.add('active');
+  document.getElementById('forgotPasswordForm').classList.remove('active');
+}
+
+function showLoginForm() {
+  document.getElementById('loginForm').classList.add('active');
+  document.getElementById('registerForm').classList.remove('active');
+  document.getElementById('forgotPasswordForm').classList.remove('active');
+}
+
+function showForgotPassword() {
+  document.getElementById('loginForm').classList.remove('active');
+  document.getElementById('registerForm').classList.remove('active');
+  document.getElementById('forgotPasswordForm').classList.add('active');
+}
+
+function togglePasswordVisibility(inputId) {
+  const input = document.getElementById(inputId);
+  if (!input) return;
+  const button = input.parentElement.querySelector('.password-toggle');
+  if (!button) return;
+
+  if (input.type === 'password') {
+    input.type = 'text';
+    button.textContent = '🙈';
+    button.setAttribute('aria-label', 'Hide password');
+  } else {
+    input.type = 'password';
+    button.textContent = '👁️';
+    button.setAttribute('aria-label', 'Show password');
+  }
+}
+
+function handleForgotPassword(event) {
+  event.preventDefault();
+
+  const email = document.getElementById('forgot-email').value;
+
+  if (email) {
+    alert('Password reset link sent to your email address.');
+    showLoginForm();
+  } else {
+    alert('Please enter your email address.');
+  }
+}
+
+function loginWithGoogle() {
+  alert('Google login integration coming soon!');
+}
+
+function loginWithMicrosoft() {
+  alert('Microsoft login integration coming soon!');
+}
+
+function showTerms() {
+  alert('Terms of Service: By using ForecastPro, you agree to our terms and conditions...');
+}
+
+function showPrivacy() {
+  alert('Privacy Policy: We are committed to protecting your data and privacy...');
+}
+
+// Password strength indicator
+document.getElementById('register-password').addEventListener('input', function() {
+  const password = this.value;
+  const strength = document.getElementById('passwordStrength');
+
+  let score = 0;
+  if (password.length >= 8) score++;
+  if (/[a-z]/.test(password)) score++;
+  if (/[A-Z]/.test(password)) score++;
+  if (/[0-9]/.test(password)) score++;
+  if (/[^A-Za-z0-9]/.test(password)) score++;
+
+  const strengthText = ['Very Weak', 'Weak', 'Fair', 'Good', 'Strong'];
+  const strengthColors = ['#ff4444', '#ff8844', '#ffaa44', '#aaff44', '#44ff44'];
+
+  strength.textContent = password ? `Password strength: ${strengthText[score]}` : '';
+  strength.style.color = strengthColors[score];
+});
+
+// Initialize app when page loads
+document.addEventListener('DOMContentLoaded', function() {
+  initApp();
+});
+</script>
+</body>
+</html>

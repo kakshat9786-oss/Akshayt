@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Assistant - ForecastPro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Advanced AI assistant for data analysis, forecasting insights, and intelligent business recommendations.">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2>ForecastPro</h2>
+    <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="index.html">🏠 Home</a>
+    <a href="about.html">ℹ️ About</a>
+    <a href="services.html">🛠️ Services</a>
+    <a href="forecast.html">📈 Forecast</a>
+    <a href="dashboard.html">📊 Dashboard</a>
+    <a href="ai.html">🤖 AI Assistant</a>
+    <a href="settings.html">⚙️ Settings</a>
+    <a href="login.html">🔐 Login</a>
+    <a href="contact.html">📞 Contact</a>
+  </nav>
+</div>
+<div class="main-content">
+<header>
+  <button onclick="toggleTheme()">🌙</button>
+</header>
+
+<section class="ai-assistant-page fade">
+  <div class="ai-header">
+    <h1>AI Assistant</h1>
+    <p id="userGreeting" class="user-greeting"></p>
+    <p class="ai-intro">Get intelligent insights, automated analysis, and personalized recommendations for your forecasting needs.</p>
+  </div>
+
+  <div class="ai-features">
+    <div class="feature-card">
+      <div class="feature-icon">💬</div>
+      <h3>Conversational AI</h3>
+      <p>Ask questions about your data, get forecasting advice, and receive business insights in natural language.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <h3>Data Analysis</h3>
+      <p>Upload files or paste data for automatic analysis, pattern detection, and trend identification.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎯</div>
+      <h3>Smart Recommendations</h3>
+      <p>Get personalized suggestions for improving forecast accuracy and business performance.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📈</div>
+      <h3>Automated Forecasting</h3>
+      <p>Let AI automatically select the best forecasting method and parameters for your data.</p>
+    </div>
+  </div>
+
+  <div class="ai-chat-section">
+    <div class="chat-container">
+      <div class="chat-header">
+        <h3>AI Conversation</h3>
+        <div class="chat-controls">
+          <button onclick="clearChat()" class="clear-chat-btn">🗑️ Clear</button>
+          <button onclick="exportChat()" class="export-chat-btn">📤 Export</button>
+        </div>
+      </div>
+      <div class="chat-window" id="chatWindow">
+        <div class="message ai-message">
+          <div class="message-avatar">🤖</div>
+          <div class="message-content">
+            <p>Hello! I'm your AI assistant. I can help you with:</p>
+            <ul>
+              <li>Data analysis and insights</li>
+              <li>Forecasting recommendations</li>
+              <li>Business intelligence questions</li>
+              <li>File analysis and processing</li>
+            </ul>
+            <p>How can I assist you today?</p>
+          </div>
+        </div>
+      </div>
+      <div class="chat-input-area">
+        <div class="chat-input-container">
+          <input id="aiPrompt" type="text" placeholder="Ask me anything about your data or forecasting..." onkeypress="handleKeyPress(event)">
+          <button onclick="sendAiMessage()" class="send-btn">📤</button>
+        </div>
+        <div class="quick-questions">
+          <button onclick="quickQuestion('What forecasting method should I use?')" class="quick-q-btn">📈 Best Method</button>
+          <button onclick="quickQuestion('Analyze my sales data')" class="quick-q-btn">📊 Analyze Data</button>
+          <button onclick="quickQuestion('How accurate are my forecasts?')" class="quick-q-btn">🎯 Accuracy Check</button>
+          <button onclick="quickQuestion('What trends do you see?')" class="quick-q-btn">📉 Trend Analysis</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ai-tools-panel">
+      <div class="tool-section">
+        <h3>Data Upload & Analysis</h3>
+        <div class="upload-area">
+          <div class="upload-zone" id="uploadZone">
+            <div class="upload-icon">📁</div>
+            <p>Drag & drop files here or click to browse</p>
+            <p class="upload-formats">Supports: CSV, Excel, JSON, TXT</p>
+            <input id="fileUpload" type="file" accept=".csv,.xlsx,.xls,.json,.txt" onchange="handleFileUpload(event)" style="display: none;">
+          </div>
+          <button onclick="document.getElementById('fileUpload').click()" class="upload-btn">Choose File</button>
+        </div>
+        <div id="fileInfo" class="file-info">No file selected</div>
+        <div class="analysis-actions">
+          <button onclick="analyzeData()" class="analyze-btn">🔍 Analyze Data</button>
+          <button onclick="autoForecast()" class="forecast-btn">📈 Auto Forecast</button>
+          <button onclick="generateReport()" class="report-btn">📋 Generate Report</button>
+        </div>
+      </div>
+
+      <div class="tool-section">
+        <h3>Analysis Results</h3>
+        <div id="analysisOutput" class="analysis-results">
+          <div class="placeholder-content">
+            <p>Upload a file or ask a question to see analysis results here.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tool-section">
+        <h3>AI Insights</h3>
+        <div class="insights-list">
+          <div class="insight-item">
+            <div class="insight-icon">📊</div>
+            <div class="insight-content">
+              <h4>Data Quality Score</h4>
+              <p>Upload data to see quality metrics and recommendations.</p>
+            </div>
+          </div>
+          <div class="insight-item">
+            <div class="insight-icon">🎯</div>
+            <div class="insight-content">
+              <h4>Forecast Confidence</h4>
+              <p>Get confidence intervals and accuracy predictions.</p>
+            </div>
+          </div>
+          <div class="insight-item">
+            <div class="insight-icon">⚡</div>
+            <div class="insight-content">
+              <h4>Performance Tips</h4>
+              <p>Receive optimization suggestions for better results.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Capabilities Showcase -->
+  <div class="ai-capabilities">
+    <h3>What the AI Can Do</h3>
+    <div class="capabilities-grid">
+      <div class="capability-item">
+        <h4>🔍 Pattern Recognition</h4>
+        <p>Automatically identifies trends, seasonality, and anomalies in your data.</p>
+      </div>
+      <div class="capability-item">
+        <h4>📈 Method Selection</h4>
+        <p>Recommends the best forecasting algorithm based on your data characteristics.</p>
+      </div>
+      <div class="capability-item">
+        <h4>⚠️ Anomaly Detection</h4>
+        <p>Flags unusual data points and potential outliers for review.</p>
+      </div>
+      <div class="capability-item">
+        <h4>📊 Comparative Analysis</h4>
+        <p>Compares different forecasting methods and their performance.</p>
+      </div>
+      <div class="capability-item">
+        <h4>🎯 Accuracy Optimization</h4>
+        <p>Suggests ways to improve forecast accuracy and reliability.</p>
+      </div>
+      <div class="capability-item">
+        <h4>💡 Business Insights</h4>
+        <p>Provides actionable business recommendations based on data analysis.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 ForecastPro. All rights reserved.</p>
+</footer>
+</div>
+<script src="script.js"></script>
+<script>
+// Enhanced AI Assistant functionality
+let uploadedFile = null;
+let chatHistory = [];
+
+document.addEventListener('DOMContentLoaded', function() {
+  initApp();
+  initDragAndDrop();
+});
+
+function initDragAndDrop() {
+  const uploadZone = document.getElementById('uploadZone');
+
+  uploadZone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    uploadZone.classList.add('drag-over');
+  });
+
+  uploadZone.addEventListener('dragleave', () => {
+    uploadZone.classList.remove('drag-over');
+  });
+
+  uploadZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    uploadZone.classList.remove('drag-over');
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+      handleFileUpload({ target: { files: files } });
+    }
+  });
+}
+
+function handleKeyPress(event) {
+  if (event.key === 'Enter') {
+    sendAiMessage();
+  }
+}
+
+function sendAiMessage() {
+  const prompt = document.getElementById('aiPrompt').value.trim();
+  if (!prompt) return;
+
+  addMessage('user', prompt);
+  document.getElementById('aiPrompt').value = '';
+
+  // Simulate AI response (in real implementation, this would call an API)
+  setTimeout(() => {
+    const response = generateAiResponse(prompt);
+    addMessage('ai', response);
+  }, 1000);
+}
+
+function addMessage(type, content) {
+  const chatWindow = document.getElementById('chatWindow');
+  const messageDiv = document.createElement('div');
+  messageDiv.className = `message ${type}-message`;
+
+  const avatar = type === 'ai' ? '🤖' : '👤';
+  messageDiv.innerHTML = `
+    <div class="message-avatar">${avatar}</div>
+    <div class="message-content">
+      <p>${content}</p>
+    </div>
+  `;
+
+  chatWindow.appendChild(messageDiv);
+  chatWindow.scrollTop = chatWindow.scrollHeight;
+}
+
+function generateAiResponse(prompt) {
+  // Simple response generation - in real implementation, this would use AI API
+  const responses = {
+    'forecast': 'For forecasting, I recommend using exponential smoothing for stable data or ARIMA for data with trends and seasonality.',
+    'accuracy': 'Forecast accuracy depends on data quality, method selection, and historical patterns. Current accuracy metrics show 94.7% on average.',
+    'trend': 'I can see an upward trend in your data with seasonal patterns. The growth rate appears to be approximately 12% month-over-month.',
+    'default': 'I understand you\'re asking about ' + prompt.toLowerCase() + '. Let me analyze this and provide insights. Based on the data patterns, I recommend...'
+  };
+
+  for (const key in responses) {
+    if (prompt.toLowerCase().includes(key)) {
+      return responses[key];
+    }
+  }
+  return responses['default'];
+}
+
+function quickQuestion(question) {
+  document.getElementById('aiPrompt').value = question;
+  sendAiMessage();
+}
+
+function handleFileUpload(event) {
+  const file = event.target.files[0];
+  if (file) {
+    uploadedFile = file;
+    document.getElementById('fileInfo').textContent = `File: ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+  }
+}
+
+function analyzeData() {
+  if (!uploadedFile) {
+    alert('Please upload a file first');
+    return;
+  }
+
+  const output = document.getElementById('analysisOutput');
+  output.innerHTML = `
+    <div class="analysis-loading">
+      <p>🔍 Analyzing data...</p>
+    </div>
+  `;
+
+  // Simulate analysis
+  setTimeout(() => {
+    output.innerHTML = `
+      <div class="analysis-results-content">
+        <h4>Analysis Complete</h4>
+        <div class="analysis-metrics">
+          <div class="metric">
+            <span class="metric-label">Data Points:</span>
+            <span class="metric-value">1,247</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Time Range:</span>
+            <span class="metric-value">12 months</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Trend:</span>
+            <span class="metric-value positive">+15.3%</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Seasonality:</span>
+            <span class="metric-value">Detected</span>
+          </div>
+        </div>
+        <div class="analysis-insights">
+          <h5>Key Insights:</h5>
+          <ul>
+            <li>Strong upward trend with seasonal peaks in Q4</li>
+            <li>Outliers detected in 3 data points (2.4% of total)</li>
+            <li>Recommended forecasting method: Seasonal ARIMA</li>
+            <li>Expected accuracy: 92-96%</li>
+          </ul>
+        </div>
+      </div>
+    `;
+  }, 2000);
+}
+
+function autoForecast() {
+  if (!uploadedFile) {
+    alert('Please upload a file first');
+    return;
+  }
+
+  addMessage('ai', 'Generating automated forecast using optimal algorithm selection...');
+
+  setTimeout(() => {
+    addMessage('ai', '✅ Forecast generated successfully!\n\n• Method: Seasonal Exponential Smoothing\n• Accuracy: 94.2%\n• Confidence Interval: ±5.8%\n\nThe forecast predicts a 18% growth over the next 6 months with seasonal peaks in Q4.');
+  }, 3000);
+}
+
+function generateReport() {
+  if (!uploadedFile) {
+    alert('Please upload a file first');
+    return;
+  }
+
+  addMessage('ai', '📋 Generating comprehensive analysis report...');
+
+  setTimeout(() => {
+    addMessage('ai', '📄 Report generated!\n\n📊 Executive Summary\n📈 Trend Analysis\n🎯 Forecast Results\n⚠️ Risk Assessment\n💡 Recommendations\n\nReport downloaded to your device.');
+  }, 2500);
+}
+
+function clearChat() {
+  document.getElementById('chatWindow').innerHTML = '';
+}
+
+function exportChat() {
+  const chatWindow = document.getElementById("chatWindow");
+  if (!chatWindow) return;
+
+  const messages = chatWindow.querySelectorAll('.chat-line');
+  let chatText = "ForecastPro AI Chat Export\n";
+  chatText += "=" .repeat(50) + "\n\n";
+
+  messages.forEach(message => {
+    const author = message.querySelector('strong').textContent;
+    const content = message.querySelector('span').textContent;
+    chatText += `${author} ${content}\n\n`;
+  });
+
+  chatText += "Generated on: " + new Date().toLocaleString() + "\n";
+
+  const blob = new Blob([chatText], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `forecastpro-chat-${new Date().toISOString().split('T')[0]}.txt`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
+  alert('Chat exported successfully!');
+}
+
+function generateReport() {
+  const fileInfo = document.getElementById("fileInfo").textContent;
+  const analysisOutput = document.getElementById("analysisOutput").textContent;
+
+  let reportText = "ForecastPro Data Analysis Report\n";
+  reportText += "=" .repeat(50) + "\n\n";
+  reportText += `Generated on: ${new Date().toLocaleString()}\n\n`;
+  reportText += `File Information: ${fileInfo}\n\n`;
+  reportText += "Analysis Results:\n";
+  reportText += "-".repeat(20) + "\n";
+  reportText += analysisOutput + "\n\n";
+  reportText += "Recommendations:\n";
+  reportText += "- Review data quality and completeness\n";
+  reportText += "- Consider seasonal patterns in forecasting\n";
+  reportText += "- Validate results with additional data sources\n";
+
+  const blob = new Blob([reportText], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `forecastpro-report-${new Date().toISOString().split('T')[0]}.txt`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
+  alert('Report generated and downloaded!');
+}
+</script>
+</body>
+</html>
